@@ -12,7 +12,11 @@ app.use(express.json());
 let noiseReadings = [];
 let devices = [];
 
+<<<<<<< HEAD
 // ========== HEALTH CHECK ==========
+=======
+// ========== HEALTH CHECK (MUST BE FIRST) ==========
+>>>>>>> 67adcd1bd62d70a5c703f260d58d91cdab51909f
 app.get('/health', (req, res) => {
     res.json({ 
         status: 'ok', 
@@ -21,6 +25,7 @@ app.get('/health', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 // ========== ROOT ENDPOINT ==========
 app.get('/', (req, res) => {
     res.json({
@@ -36,6 +41,8 @@ app.get('/', (req, res) => {
     });
 });
 
+=======
+>>>>>>> 67adcd1bd62d70a5c703f260d58d91cdab51909f
 // ========== DEVICE ROUTES ==========
 app.get('/api/devices', (req, res) => {
     res.json(devices);
@@ -87,7 +94,11 @@ app.get('/api/live', (req, res) => {
     
     const readings = noiseReadings.filter(r => r.device_id === device_id);
     if (readings.length === 0) {
+<<<<<<< HEAD
         return res.status(404).json({ error: 'No readings found for this device' });
+=======
+        return res.status(404).json({ error: 'No readings found' });
+>>>>>>> 67adcd1bd62d70a5c703f260d58d91cdab51909f
     }
     
     res.json(readings[readings.length - 1]);
@@ -104,11 +115,26 @@ app.get('/api/history', (req, res) => {
     res.json({ device_id, count: readings.length, data: readings });
 });
 
+<<<<<<< HEAD
 // 404 handler for unknown routes
 app.use('*', (req, res) => {
     res.status(404).json({ 
         error: 'Route not found',
         message: `The endpoint ${req.method} ${req.originalUrl} does not exist`
+=======
+// ========== ROOT ENDPOINT ==========
+app.get('/', (req, res) => {
+    res.json({
+        name: 'Noise Monitor API',
+        endpoints: {
+            health: 'GET /health',
+            devices: 'GET /api/devices',
+            register: 'POST /api/devices',
+            data: 'POST /api/noise-data',
+            live: 'GET /api/live?device_id=XXX',
+            history: 'GET /api/history?device_id=XXX'
+        }
+>>>>>>> 67adcd1bd62d70a5c703f260d58d91cdab51909f
     });
 });
 
